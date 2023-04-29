@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Invoice extends Model
 {
@@ -17,10 +16,13 @@ class Invoice extends Model
     ];
 
     protected $casts = [
+        'id' => 'string',
         'due_date' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public $incrementing = false;
 
     public const DRAFT = 'draft';
     public const APPROVED = 'approved';
@@ -33,6 +35,6 @@ class Invoice extends Model
 
     public function product() : BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'invoice_products');
+        return $this->belongsToMany(Product::class, 'invoice_products')->withPivot('quantity');
     }
 }

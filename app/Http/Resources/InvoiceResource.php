@@ -20,10 +20,11 @@ class InvoiceResource extends JsonResource
             'due_date' => $this->due_date->format('d-m-Y'),
             'status' => $this->status,
             'company' => new CompanyResource($this->company),
-            // 'billed_company' => BilledCompanyResource::collection($this->whenLoaded('company')),
+            'billed_company' => new BilledCompanyResource($this->company),
             'products' => ProductResource::collection($this->product),
-            'created_at' => $this->created_at->format('d-m-Y H:i:s'),
-            'updated_at' => $this->updated_at->format('d-m-Y H:i:s')
+            'total_price' => $this->product->sum(function ($product) {
+                return $product->pivot->quantity * $product->price;
+            })
         ];
     }
 }

@@ -15,15 +15,12 @@ class BilledCompanyResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'name' => $this->name,
             'street' => $this->street,
             'city' => $this->city,
             'zip' => $this->zip,
             'phone' => $this->phone,
-            'email' => $this->email,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'email' => $this->email
         ];
     }
 }

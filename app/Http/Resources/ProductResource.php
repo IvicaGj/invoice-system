@@ -17,9 +17,8 @@ class ProductResource extends JsonResource
         return [
             'name' => $this->name,
             'price' => $this->price,
-            'currency' => $this->currency,
-            'created_at' => $this->created_at->format('d-m-Y H:i:s'),
-            'updated_at' => $this->updated_at->format('d-m-Y H:i:s')
+            'quantity' => $this->pivot->quantity,
+            'total' => $this->pivot->quantity * $this->price
         ];
     }
 }

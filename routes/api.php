@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Invoices\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get(
-//     '/invoices',
-//     App\Http\Controllers\Invoices\InvoiceController::class,
-// )->name('invoices.index');
+Route::post('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+Route::post('/invoice/approve', [InvoiceController::class, 'approve'])->name('invoice.approve');
+Route::post('/invoice/reject', [InvoiceController::class, 'reject'])->name('invoice.reject');
